@@ -8,14 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var animal = [AnimalLista(nombreImagen: "leoncartoon", nombreAnimal: "Leon"), AnimalLista(nombreImagen: "gorrioncartoon", nombreAnimal: "Gorrion"), AnimalLista(nombreImagen: "perrocartoon", nombreAnimal: "Perro")]
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationView {
+            List{
+                ForEach(animal) { animal in
+                    NavigationLink(destination: AnimalDetalleView(nombreAnimal: animal.nombreAnimal, nombreImagen: animal.nombreImagen)){
+                        MostrarEnListView(nombreImagen: animal.nombreImagen, nombreAnimal: animal.nombreAnimal)
+                    }
+                }
+            }.navigationBarTitle("Mis 3 animales Favoritos", displayMode: .inline)
+            
         }
-        .padding()
     }
 }
 
